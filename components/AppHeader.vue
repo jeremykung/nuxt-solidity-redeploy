@@ -21,6 +21,8 @@
 </template>
 
 <script setup>
+const web3Store = useWeb3Store()
+
 async function connectWallet() {
   const accounts = await window.ethereum
     .request({ method: "eth_requestAccounts" })
@@ -31,10 +33,13 @@ async function connectWallet() {
         console.error(err)
       }
     })
+  console.log("account connected:", accounts)
+  await web3Store.setAccount(accounts[0])
+  console.log("set global account as:", web3Store.account)
 }
 
+// Dark Mode
 const colorMode = useColorMode()
-
 const isDark = computed({
   get() {
     return colorMode.value === "dark"

@@ -1,6 +1,7 @@
 <template>
   <div>
     <h1 class="text-left text-2xl">Create Post</h1>
+    <p class="text-slate-400 italic">Account: {{ web3Store.account }}</p>
     <UInput
       v-model="blogTitle"
       color="primary"
@@ -21,4 +22,5 @@
 <script setup>
 const blogTitle = ref("")
 const blogContent = ref("")
+const web3Store = useWeb3Store()
 </script>
