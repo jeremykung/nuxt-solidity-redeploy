@@ -6,7 +6,7 @@
       v-model="blogTitle"
       color="primary"
       variant="outline"
-      placeholder="Blog Title..."
+      placeholder="Post Title..."
       class="my-4"
     />
     <UTextarea
@@ -18,7 +18,20 @@
     />
     <UButton @click="createPost" block>Button</UButton>
 
-    <p v-if="blogTitle">{{ blogTitle }}: {{ blogContent }}</p>
+    <UCard v-if="blogTitle" class="my-8">
+      <template #header>
+        <div class="flex items-center justify-between">
+          <h2 class="">{{ blogTitle }}</h2>
+          <p class="text-xs font-thin italic text-right">Post Preview</p>
+        </div>
+      </template>
+
+      <p class="font-thin text-sm">{{ blogContent }}</p>
+
+      <template #footer>
+        <p class="text-sm font-thin italic">{{ web3Store.account }}</p>
+      </template>
+    </UCard>
   </div>
 </template>
 
