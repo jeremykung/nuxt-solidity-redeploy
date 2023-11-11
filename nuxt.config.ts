@@ -14,4 +14,7 @@ export default defineNuxtConfig({
   imports: {
     dirs: ["stores"],
   },
+  nitro: {
+    preset: "node-server",
+  },
 })
