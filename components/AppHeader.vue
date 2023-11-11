@@ -23,6 +23,7 @@
 <script setup>
 const web3Store = useWeb3Store()
 
+// Connect Wallet
 async function connectWallet() {
   const accounts = await window.ethereum
     .request({ method: "eth_requestAccounts" })
