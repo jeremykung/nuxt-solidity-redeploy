@@ -1,7 +1,7 @@
 <template>
   <!-- Quick Start -->
   <div class="mb-8">
-    <h1 class="text-2xl">Quick Start Guide</h1>
+    <h1 class="text-2xl mb-2">Quick Start Guide</h1>
     <div class="font-thin text-gray-400">
       <p>1. Install Metamask & switch to Sepolia Test Network</p>
       <p>

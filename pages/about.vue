@@ -1,6 +1,6 @@
 <template>
   <div class="sm:flex-row flex flex-col justify-around">
-    <div class="sm:w-3/12 sm:text-right w-full text-left">
+    <div class="sm:w-3/12 sm:text-right sm:mb-0 w-full text-left mb-8">
       <h1 class="text-2xl text-primary-400 mb-2">Technologies</h1>
       <ul class="font-light text-gray-400">
         <li>Nuxt 3</li>
