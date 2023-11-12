@@ -1,7 +1,16 @@
 <template>
-  <nav class="py-4 mb-6 flex justify-between items-center">
-    <div class="text-xl text-gray-500">Nuxt x Solidity</div>
+  <nav class="py-4 flex justify-between items-center">
+    <NuxtLink to="/">
+      <div class="text-xl text-gray-500">Nuxt x Solidity</div>
+    </NuxtLink>
     <div class="flex items-center gap-2">
+      <NuxtLink v-if="!onHomepage" to="/">
+        <UButton color="white" variant="solid">Home</UButton>
+      </NuxtLink>
+      <NuxtLink to="/about">
+        <UButton color="white" variant="solid">About</UButton>
+      </NuxtLink>
+
       <UButton
         v-if="!web3Store.account"
         @click="connectWallet"
@@ -29,6 +38,11 @@
       </ClientOnly>
     </div>
   </nav>
+  <UDivider
+    label=""
+    class="mb-8"
+    :ui="{ border: { size: { horizontal: 'border-t-2' } } }"
+  />
 </template>
 
 <script setup>
