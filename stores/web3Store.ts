@@ -6,6 +6,7 @@ export const useWeb3Store = defineStore("web3", {
     account: null,
     blogContract: null,
     blogContractAddress: "0x2f7C319eDf93364976E548E659f3400d5A511Ff0",
+    allBlogPosts: null,
   }),
   actions: {
     setAccount(account: null) {
