@@ -1,6 +1,28 @@
 <template>
   <div>
     <h1 class="text-2xl mb-8">Posts</h1>
+    <p v-if="!web3Store.account" class="font-thin italic text-slate-400">
+      Please connect wallet to see your posts
+    </p>
+    <!-- <p v-if="web3Store.account && !posts">
+      {{ postHelpMessage }}
+    </p> -->
+
+    <!-- Conditionally render. If no posts, show something else -->
+    <p
+      v-if="posts && posts.length === 0"
+      class="font-thin italic text-slate-400"
+    >
+      Create your first post on the left
+    </p>
+    <UCard v-if="web3Store.account && !posts" class="mb-8">
+      <template #header>
+        <USkeleton class="h-4 w-[150px]" />
+      </template>
+      <USkeleton class="h-4 w-[250px] mb-4" />
+      <USkeleton class="h-4 w-[200px]" />
+    </UCard>
+
     <UCard v-for="post in posts" class="mb-8">
       <template #header>
         <h2 class="">{{ post.title }}</h2>
@@ -20,7 +42,10 @@
 const web3Store = useWeb3Store()
 
 const posts = ref(null)
-setInterval(displayPosts, 1000)
+const postHelpMessage = ref("Create your first post on the left")
+
+setInterval(displayPosts, 2000)
+
 async function displayPosts() {
   //   console.log(
   //     "blogContract for loading posts:",
@@ -43,9 +68,14 @@ async function displayPosts() {
       return post
     })
     posts.value = getAllPostsResponse
+
+    if (posts.value.length > 0) {
+      //   console.log("posts exist:", posts.value)
+      postHelpMessage.value = "Loading Posts..."
+    }
     // console.log("fixed post data:", posts.value)
   } else {
-    console.log("please connect account")
+    // console.log("account not connected")
   }
 }
 

@@ -16,13 +16,24 @@
       placeholder="Post Content..."
       class="mb-4"
     />
-    <UButton @click="createPost" block>Button</UButton>
+    <UButton v-if="confirmingPost" variant="ghost" loading block
+      >Posting...</UButton
+    >
+    <UButton v-if="!confirmingPost" @click="createPost" block
+      >Create Post</UButton
+    >
 
+    <UDivider
+      v-if="blogTitle"
+      class="mt-8"
+      label="Preview"
+      :ui="{ label: 'font-light text-gray-400 dark:text-gray-400' }"
+    />
     <UCard v-if="blogTitle" class="my-8">
       <template #header>
         <div class="flex items-center justify-between">
           <h2 class="">{{ blogTitle }}</h2>
-          <p class="text-xs font-thin italic text-right">Post Preview</p>
+          <!-- <p class="text-xs font-thin italic text-right">Post Preview</p> -->
         </div>
       </template>
 
@@ -38,20 +49,24 @@
 <script setup>
 const blogTitle = ref("")
 const blogContent = ref("")
+const confirmingPost = ref(false)
 const web3Store = useWeb3Store()
 
 async function createPost() {
-  console.log("address for post:", web3Store.account)
-  // console.log("contract instance:", web3Store.blogContract)
-  // console.log("contract methods:", web3Store.blogContract.methods)
-  // console.log(
-  //   "contract createPost method:",
-  //   web3Store.blogContract.methods.createPost
-  // )
+  console.log("creating post for address:", web3Store.account)
+  confirmingPost.value = true
 
-  await web3Store.blogContract.methods
-    .createPost(blogTitle.value, blogContent.value)
-    .send({ from: web3Store.account })
+  try {
+    const createPostResponse = await web3Store.blogContract.methods
+      .createPost(blogTitle.value, blogContent.value)
+      .send({ from: web3Store.account })
+
+    console.log("create post res:", createPostResponse)
+  } catch (error) {
+    console.log("error posting:", error)
+  }
+
+  confirmingPost.value = false
 }
 </script>
 
