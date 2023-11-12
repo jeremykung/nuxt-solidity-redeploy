@@ -1,9 +1,20 @@
 <template>
-  <nav class="container py-4 mb-6 flex justify-between items-center">
-    <div class="text-xl text-slate-500">Nuxt x Solidity</div>
+  <nav class="py-4 mb-6 flex justify-between items-center">
+    <div class="text-xl text-gray-500">Nuxt x Solidity</div>
     <div class="flex items-center gap-2">
-      <UButton @click="connectWallet" color="gray" variant="solid"
+      <UButton
+        v-if="!web3Store.account"
+        @click="connectWallet"
+        color="primary"
+        variant="outline"
         >Connect</UButton
+      >
+      <UButton
+        v-if="web3Store.account"
+        @click="connectWallet"
+        color="primary"
+        variant="ghost"
+        >Connected</UButton
       >
       <ClientOnly>
         <UButton
