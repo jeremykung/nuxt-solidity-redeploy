@@ -15,6 +15,6 @@ export default defineNuxtConfig({
     dirs: ["stores"],
   },
   nitro: {
-    preset: "node-server",
+    preset: "vercel-edge",
   },
 })
