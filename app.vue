@@ -14,6 +14,7 @@ import blogContractABI from "/abis/blogAbi.json"
 const web3Store = useWeb3Store()
 
 onMounted(async () => {
+  // Connect web3 Provider
   if (process.client && window.ethereum) {
     const web3 = await new Web3(window.ethereum)
     await web3Store.setWeb3Instance(web3)
