@@ -1,5 +1,6 @@
 <template>
   <UContainer>
+    <p>Test 1</p>
     <NuxtLayout>
       <NuxtPage />
     </NuxtLayout>
