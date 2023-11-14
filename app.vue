@@ -16,6 +16,7 @@ import detectEthereumProvider from "@metamask/detect-provider"
 const web3Store = useWeb3Store()
 
 onMounted(async () => {
+  console.log("test 1")
   // This returns the provider, or null if it wasn't detected.
   try {
     const provider = await detectEthereumProvider()
