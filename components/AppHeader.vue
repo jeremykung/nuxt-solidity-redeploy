@@ -44,12 +44,14 @@
     :ui="{ border: { size: { horizontal: 'border-t-2' } } }"
   />
   <div class="my-8">{{ connectError }}</div>
+  <div class="my-8">{{ connectError }}</div>
 </template>
 
 <script setup>
 const web3Store = useWeb3Store()
 
 const connectError = ref(null)
+const connectErrorMessage = ref(null)
 
 // Connect Wallet
 async function connectWallet() {
@@ -59,8 +61,9 @@ async function connectWallet() {
       if (err.code === 4001) {
         console.log("Please connect to MetaMask.")
       } else {
-        console.error(err)
-        connectError.value = err
+        console.error("error", err)
+        connectError.value = "Error Connecting Account"
+        connectErrorMessage.value = err
       }
     })
   console.log("account connected:", accounts)

@@ -8,16 +8,38 @@
 
 <script setup>
 import Web3 from "web3"
-// import contractABI from "/abis/abi.json"
 import blogContractABI from "/abis/blogAbi.json"
+
+// This function detects most providers injected at window.ethereum.
+import detectEthereumProvider from "@metamask/detect-provider"
 
 const web3Store = useWeb3Store()
 
 onMounted(async () => {
+  // This returns the provider, or null if it wasn't detected.
+  try {
+    const provider = await detectEthereumProvider()
+    console.log("provider:", provider)
+
+    if (provider) {
+      // From now on, this should always be true:
+      // provider === window.ethereum
+      startApp(provider) // initialize your app
+    } else {
+      console.log("Please install MetaMask!")
+    }
+  } catch (error) {
+    console.log("error detecting provider:", error)
+  }
+
   // Connect web3 Provider
   if (process.client && window.ethereum) {
-    const web3 = await new Web3(window.ethereum)
-    await web3Store.setWeb3Instance(web3)
+    try {
+      const web3 = await new Web3(window.ethereum)
+      await web3Store.setWeb3Instance(web3)
+    } catch (error) {
+      console.log("error finding window.ethereum:", error)
+    }
   } else {
     console.log(
       "Non-Ethereum browser detected. You should consider trying MetaMask!"
