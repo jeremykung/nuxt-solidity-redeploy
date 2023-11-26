@@ -1,4 +1,12 @@
 <template>
+  <!-- Alert -->
+  <UAlert
+    icon="i-heroicons-exclamation-triangle"
+    color="primary"
+    variant="solid"
+    title="This is a desktop web application. Mobile implementation is under development."
+    class="mb-8"
+  />
   <!-- Quick Start -->
   <div class="mb-8">
     <h1 class="text-2xl mb-2">Quick Start Guide</h1>
