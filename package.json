@@ -21,8 +21,9 @@
     "@metamask/detect-provider": "^2.0.0",
     "@nuxt/ui": "^2.10.0",
     "@pinia/nuxt": "^0.5.1",
-    "@walletconnect/web3wallet": "^1.9.4",
+    "@web3modal/ethers5": "^3.4.0",
     "dotenv": "^16.3.1",
+    "ethers": "^5.7.2",
     "pinia": "^2.1.7",
     "web3": "^4.2.2"
   }
