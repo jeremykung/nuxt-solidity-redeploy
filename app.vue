@@ -7,19 +7,24 @@
 </template>
 
 <script setup>
-// Vanilla Imports
+// .env setup via nuxt.config.ts
+const runtimeConfig = useRuntimeConfig();
+
+// Vanilla (web3)
 import Web3 from "web3";
 import blogContractABI from "/abis/blogAbi.json";
 import detectEthereumProvider from "@metamask/detect-provider";
 
-// Wallet Connect
+// Wallet Connect (Modal)
 import { createWeb3Modal, defaultConfig } from "@web3modal/ethers5/vue";
+// Wallet Connect (Wallet) -- CURRENTLY BREAKS SITE (heartbeat module issue)
+// import { Core } from "@walletconnect/core";
+// import { Web3Wallet } from "@walletconnect/web3wallet";
 
-// Vanilla Setup
-const runtimeConfig = useRuntimeConfig(); // dotenv setup via nuxt.config
-const web3Store = useWeb3Store();
+// Vanilla (web3)
+const web3Store = useWeb3Store(); // web3
 
-// Wallet Connect
+// Wallet Connect (Modal)
 // 1. Get projectId
 const projectId = runtimeConfig.public.PROJECT_ID;
 
@@ -47,6 +52,25 @@ createWeb3Modal({
   projectId,
 });
 
+// WalletConnect (Wallet) -- CURRENTLY BREAKS SITE (heartbeat module issue)
+// const core = new Core({
+//   projectId: runtimeConfig.public.PROJECT_ID,
+// });
+// console.log("core initialized:", core);
+
+// const web3wallet = await Web3Wallet.init({
+//   core, // <- pass the shared `core` instance
+//   metadata: {
+//     name: "Nuxt x Solidity",
+//     description:
+//       "Nuxt.js / Solidity / web3 / WalletConnect / Tailwind / MetaMask",
+//     url: "https://nuxt-solidity-jeremykung.vercel.app/",
+//     icons: [],
+//   },
+// });
+// console.log("web3wallet initialized:", web3wallet);
+
+// Vanilla (web3)
 onMounted(async () => {
   // Connect web3 Provider
   if (process.client && window.ethereum) {
