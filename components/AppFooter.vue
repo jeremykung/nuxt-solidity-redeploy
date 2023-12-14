@@ -6,7 +6,10 @@
   />
 
   <div class="text-right font-thin text-sm italic py-4">
-    Created by <span class="text-primary font-normal">Jeremy Kung</span>
+    Created by
+    <span class="text-primary font-normal">
+      <a href="https://github.com/jeremykung" target="_blank">Jeremy Kung</a>
+    </span>
   </div>
 </template>
 
