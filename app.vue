@@ -8,25 +8,25 @@
 
 <script setup>
 // .env setup via nuxt.config.ts
-const runtimeConfig = useRuntimeConfig();
+const runtimeConfig = useRuntimeConfig()
 
 // Vanilla (web3)
-import Web3 from "web3";
-import blogContractABI from "/abis/blogAbi.json";
-import detectEthereumProvider from "@metamask/detect-provider";
+import Web3 from "web3"
+import blogContractABI from "/abis/blogAbi.json"
+import detectEthereumProvider from "@metamask/detect-provider"
 
 // Wallet Connect (Modal)
-import { createWeb3Modal, defaultConfig } from "@web3modal/ethers5/vue";
+import { createWeb3Modal, defaultConfig } from "@web3modal/ethers5/vue"
 // Wallet Connect (Wallet) -- CURRENTLY BREAKS SITE (heartbeat module issue)
 // import { Core } from "@walletconnect/core";
 // import { Web3Wallet } from "@walletconnect/web3wallet";
 
 // Vanilla (web3)
-const web3Store = useWeb3Store(); // web3
+const web3Store = useWeb3Store() // web3
 
 // Wallet Connect (Modal)
 // 1. Get projectId
-const projectId = runtimeConfig.public.PROJECT_ID;
+const projectId = runtimeConfig.public.PROJECT_ID
 
 // 2. Set chains
 const mainnet = {
@@ -35,7 +35,7 @@ const mainnet = {
   currency: "ETH",
   explorerUrl: "https://etherscan.io",
   rpcUrl: "https://cloudflare-eth.com",
-};
+}
 
 // 3. Create modal
 const metadata = {
@@ -44,13 +44,13 @@ const metadata = {
     "Project integrating custom Solidity smart contracts with Nuxt.js frontend",
   url: "https://nuxt-solidity-jeremykung.vercel.app/",
   icons: ["https://avatars.mywebsite.com/"],
-};
+}
 
 createWeb3Modal({
   ethersConfig: defaultConfig({ metadata }),
   chains: [mainnet],
   projectId,
-});
+})
 
 // WalletConnect (Wallet) -- CURRENTLY BREAKS SITE (heartbeat module issue)
 // const core = new Core({
@@ -77,38 +77,38 @@ onMounted(async () => {
     try {
       // Detect User Network
 
-      const chainId = await window.ethereum.request({ method: "eth_chainId" });
-      console.log("chainId", chainId);
+      const chainId = await window.ethereum.request({ method: "eth_chainId" })
+      console.log("chainId", chainId)
 
-      window.ethereum.on("chainChanged", handleChainChanged);
+      window.ethereum.on("chainChanged", handleChainChanged)
 
       function handleChainChanged(chainId) {
         // We recommend reloading the page, unless you must do otherwise.
-        window.location.reload();
+        window.location.reload()
       }
 
       // Create web3 Instance
-      const web3 = await new Web3(window.ethereum);
-      await web3Store.setWeb3Instance(web3);
-      console.log("web3:", web3Store.web3);
+      const web3 = await new Web3(window.ethereum)
+      await web3Store.setWeb3Instance(web3)
+      console.log("web3:", web3Store.web3)
 
       // Link contract ABI
       let blogContract = await new web3Store.web3.eth.Contract(
         blogContractABI,
         web3Store.blogContractAddress
-      );
-      await web3Store.setBlogContract(blogContract);
+      )
+      await web3Store.setBlogContract(blogContract)
 
-      console.log("blog contract:", web3Store.blogContract);
+      console.log("blog contract:", web3Store.blogContract)
     } catch (error) {
-      console.log("error finding window.ethereum:", error);
+      console.log("error finding window.ethereum:", error)
     }
   } else {
     console.log(
       "Non-Ethereum browser detected. You should consider trying MetaMask!"
-    );
+    )
   }
-});
+})
 
 // console.log("abi:", contractABI)
 </script>

@@ -11,6 +11,7 @@
         <UButton color="white" variant="solid">About</UButton>
       </NuxtLink>
 
+      <!-- Wallet Connect Navbar -->
       <!-- <w3m-account-button v-if="web3Store.account" />
       <UButton
         v-if="!web3Store.account"
@@ -58,13 +59,13 @@
 
 <script setup>
 // Wallet Connect Composable
-import WalletConnectComposable from "@/composables/useWeb3Modal";
-const WalletConnect = WalletConnectComposable();
+import WalletConnectComposable from "@/composables/useWeb3Modal"
+const WalletConnect = WalletConnectComposable()
 
 // Vanilla Setup
-const web3Store = useWeb3Store();
-const connectError = ref(null);
-const connectErrorMessage = ref(null);
+const web3Store = useWeb3Store()
+const connectError = ref(null)
+const connectErrorMessage = ref(null)
 
 // Vanilla Connect Wallet
 async function connectWallet() {
@@ -72,26 +73,26 @@ async function connectWallet() {
     .request({ method: "eth_requestAccounts" })
     .catch((err) => {
       if (err.code === 4001) {
-        console.log("Please connect to MetaMask.");
+        console.log("Please connect to MetaMask.")
       } else {
-        console.error("error", err);
-        connectError.value = "Error Connecting Account";
-        connectErrorMessage.value = err;
+        console.error("error", err)
+        connectError.value = "Error Connecting Account"
+        connectErrorMessage.value = err
       }
-    });
-  console.log("account connected:", accounts);
-  await web3Store.setAccount(accounts[0]);
-  console.log("set global account as:", web3Store.account);
+    })
+  console.log("account connected:", accounts)
+  await web3Store.setAccount(accounts[0])
+  console.log("set global account as:", web3Store.account)
 }
 
 // Dark Mode
-const colorMode = useColorMode();
+const colorMode = useColorMode()
 const isDark = computed({
   get() {
-    return colorMode.value === "dark";
+    return colorMode.value === "dark"
   },
   set() {
-    colorMode.preference = colorMode.value === "dark" ? "light" : "dark";
+    colorMode.preference = colorMode.value === "dark" ? "light" : "dark"
   },
-});
+})
 </script>
