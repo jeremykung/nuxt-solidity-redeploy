@@ -1,7 +1,7 @@
 <template>
   <nav class="py-4 flex justify-between items-center">
     <NuxtLink to="/">
-      <div class="text-xl text-gray-500">Nuxt x Solidity</div>
+      <div class="text-xl text-gray-500">Nuxt x Solidity x Web3</div>
     </NuxtLink>
     <div class="flex items-center gap-2">
       <NuxtLink v-if="!onHomepage" to="/">
