@@ -11,14 +11,14 @@
         <UButton color="white" variant="solid">About</UButton>
       </NuxtLink>
 
-      <w3m-account-button v-if="web3Store.account" />
+      <!-- <w3m-account-button v-if="web3Store.account" />
       <UButton
         v-if="!web3Store.account"
         @click="WalletConnect.connect()"
         color="primary"
         variant="outline"
         >Wallet Connect</UButton
-      >
+      > -->
       <!-- <w3m-button /> -->
       <UButton
         v-if="!web3Store.account"

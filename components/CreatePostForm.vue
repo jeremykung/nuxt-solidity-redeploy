@@ -3,6 +3,7 @@
     <h1 class="text-left text-2xl">Create Post</h1>
     <p class="font-light mt-2 text-slate-400 italic">
       Account: {{ web3Store.account }}
+      <!-- <w3m-account-button /> -->
     </p>
     <UInput
       v-model="blogTitle"
@@ -49,26 +50,26 @@
 </template>
 
 <script setup>
-const blogTitle = ref("")
-const blogContent = ref("")
-const confirmingPost = ref(false)
-const web3Store = useWeb3Store()
+const blogTitle = ref("");
+const blogContent = ref("");
+const confirmingPost = ref(false);
+const web3Store = useWeb3Store();
 
 async function createPost() {
-  console.log("creating post for address:", web3Store.account)
-  confirmingPost.value = true
+  console.log("creating post for address:", web3Store.account);
+  confirmingPost.value = true;
 
   try {
     const createPostResponse = await web3Store.blogContract.methods
       .createPost(blogTitle.value, blogContent.value)
-      .send({ from: web3Store.account })
+      .send({ from: web3Store.account });
 
-    console.log("create post res:", createPostResponse)
+    console.log("create post res:", createPostResponse);
   } catch (error) {
-    console.log("error posting:", error)
+    console.log("error posting:", error);
   }
 
-  confirmingPost.value = false
+  confirmingPost.value = false;
 }
 </script>
 
